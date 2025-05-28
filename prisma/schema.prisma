@@ -23,6 +23,7 @@ model LineItem {
   quantity   Int
   productId  String?
   variantId  String?
+  productHandle String?
   orderId    String   @db.ObjectId
   order      Order    @relation("OrderLineItems", fields: [orderId], references: [id])
 }

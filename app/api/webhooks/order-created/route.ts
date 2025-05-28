@@ -5,7 +5,7 @@ import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { enqueueReviewReminder } from "@/lib/sendReviewReminder";
 
-const SHOPIFY_SECRET = process.env.LITTO_SHOPIFY_API_SECRET!;
+const SHOPIFY_SECRET = process.env.SHOPIFY_API_SECRET!;
 const ALLOWED_ORIGIN =
   process.env.LITTO_ALLOWED_ORIGIN || "https://itslitto.com";
 
