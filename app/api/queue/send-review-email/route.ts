@@ -4,6 +4,11 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Define type for line item
+type LineItem = {
+  productHandle: string;
+};
+
 export async function POST(req: Request) {
   try {
     const { orderId } = await req.json();
@@ -26,9 +31,11 @@ export async function POST(req: Request) {
     }
 
     // Construct product links
-    const productLinks = order.lineItems.map((item) => {
-      return `https://cultivated-reviews.vercel.app/product/${item.productHandle}`;
-    });
+    const productLinks: string[] = (order.lineItems as LineItem[]).map(
+      (item: LineItem) => {
+        return `https://cultivated-reviews.vercel.app/product/${item.productHandle}`;
+      }
+    );
 
     // Send email via Resend
     await resend.emails.send({
@@ -41,7 +48,7 @@ export async function POST(req: Request) {
         <p>Click below to review your products:</p>
         <ul>
           ${productLinks
-            .map((link) => `<li><a href="${link}">${link}</a></li>`)
+            .map((link: string) => `<li><a href="${link}">${link}</a></li>`)
             .join("")}
         </ul>
         <p>As a thank you, you’ll receive 20% off your next purchase!</p>
