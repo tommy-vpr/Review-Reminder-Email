@@ -1,6 +1,6 @@
 export async function enqueueReviewReminder(orderId: string) {
   await fetch(
-    "https://qstash.upstash.io/v1/publish/https://cultivated-reviews.vercel.app/api/queue/send-review-email",
+    "https://qstash.upstash.io/v1/publish/https://review-reminder-seven.vercel.app/api/queue/send-review-email",
     {
       method: "POST",
       headers: {

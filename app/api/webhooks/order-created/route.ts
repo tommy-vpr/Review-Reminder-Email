@@ -5,7 +5,7 @@ import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { enqueueReviewReminder } from "@/lib/sendReviewReminder";
 
-const SHOPIFY_SECRET = process.env.SHOPIFY_API_SECRET!;
+const SHOPIFY_SECRET = process.env.SHOPIFY_WEBHOOOK_SECRET!;
 const ALLOWED_ORIGIN =
   process.env.ALLOWED_ORIGIN || "tv-testing-tutorial.myshopify.com";
 
