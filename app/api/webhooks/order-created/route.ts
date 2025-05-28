@@ -7,7 +7,7 @@ import { enqueueReviewReminder } from "@/lib/sendReviewReminder";
 
 const SHOPIFY_SECRET = process.env.SHOPIFY_API_SECRET!;
 const ALLOWED_ORIGIN =
-  process.env.LITTO_ALLOWED_ORIGIN || "https://itslitto.com";
+  process.env.ALLOWED_ORIGIN || "tv-testing-tutorial.myshopify.com";
 
 function getCorsHeaders(origin: string) {
   return {
@@ -59,7 +59,7 @@ export async function POST(req: Request) {
 
     const savedOrder = await prisma.order.create({
       data: {
-        orderId,
+        shopifyOrderId: orderId, // ✅ Fix here
         email,
         customerId,
         lineItems: {
@@ -67,7 +67,7 @@ export async function POST(req: Request) {
             title: item.title,
             productId: item.product_id?.toString() || null,
             variantId: item.variant_id?.toString() || null,
-            handle: null, // you may update this if you store handles locally
+            productHandle: null, // ✅ assuming your schema uses this
             quantity: item.quantity || 1,
           })),
         },
