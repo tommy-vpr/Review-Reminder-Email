@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Order {
+  id            String   @id @default(auto()) @map("_id") // MongoDB uses _id
+  shopifyOrderId String   @unique
+  email         String
+  customerName  String?
+  customerId    String?
+  createdAt     DateTime @default(now())
+  lineItems     LineItem[]
+}
+
+model LineItem {
+  id          String   @id @default(auto()) @map("_id")
+  title       String
+  quantity    Int
+  productId   String?
+  variantId   String?
+  orderId     String   @map("orderId") // Reference field
+}
