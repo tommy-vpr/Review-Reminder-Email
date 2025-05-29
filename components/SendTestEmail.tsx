@@ -6,8 +6,8 @@ export default function SendTestEmail() {
   const [status, setStatus] = useState("");
 
   const sendEmail = async () => {
-    setStatus("Sending...");
-    const res = await fetch("/api/test-email", {
+    setStatus("Scheduling...");
+    const res = await fetch("/api/queue/test-email", {
       method: "POST",
       body: JSON.stringify({ to: email }),
       headers: {
@@ -16,7 +16,7 @@ export default function SendTestEmail() {
     });
 
     const data = await res.json();
-    setStatus(data.success ? "✅ Email sent!" : "❌ Failed to send.");
+    setStatus(data.success ? "✅ Email scheduled!" : "❌ Failed to schedule.");
   };
 
   return (
