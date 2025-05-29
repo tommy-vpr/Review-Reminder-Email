@@ -2,17 +2,17 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY); // Add this to your .env.local
+const resend = new Resend(process.env.RESEND_API_KEY); // Use a secure token
 
 export async function POST(req: Request) {
   try {
     const { to } = await req.json();
 
     await resend.emails.send({
-      from: "hello@onboarding.resend.dev", // Resend's test domain
+      from: "hello@emails.teevong.com", // ✅ Your custom verified domain
       to,
-      subject: "🧪 Test Email from Resend",
-      html: `<p>This is a test email sent from <strong>localhost</strong> via Resend onboarding domain.</p>`,
+      subject: "🧪 Test Email from Resend via emails.teevong.com",
+      html: `<p>This is a test email sent from <strong>emails.teevong.com</strong> via Resend.</p>`,
     });
 
     return NextResponse.json({ success: true });
