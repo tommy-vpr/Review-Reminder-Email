@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   const { to } = await req.json();
 
   const res = await fetch(
-    "https://qstash.upstash.io/v1/publish/https://www.teevong.com/api/test-email",
+    "https://qstash.upstash.io/v2/publish/https://www.teevong.com/api/test-email",
     {
       method: "POST",
       headers: {
