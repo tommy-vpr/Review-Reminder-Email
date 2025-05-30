@@ -12,7 +12,7 @@ export async function POST(req: Request) {
       from: "hello@emails.teevong.com", // ✅ Your custom verified domain
       to,
       subject: "🧪 Test Email from Resend via emails.teevong.com",
-      html: `<p>This is a test email sent from <strong>emails.teevong.com</strong> via Resend.</p>`,
+      html: `<p>Queue testing 1 minute</p>`,
     });
 
     return NextResponse.json({ success: true });
