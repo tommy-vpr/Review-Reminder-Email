@@ -7,7 +7,7 @@ export default function SendTestEmail() {
 
   const sendEmail = async () => {
     setStatus("Scheduling...");
-    const res = await fetch("/api/queue/test-email", {
+    const res = await fetch("/api/queue/test-queue", {
       method: "POST",
       body: JSON.stringify({ to: email }),
       headers: {
