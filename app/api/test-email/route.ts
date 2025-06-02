@@ -1,18 +1,19 @@
 // app/api/test-email/route.ts
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import TestEmailTemplate from "@/components/emails/TestEmailTemplate"; // your React email component
 
-const resend = new Resend(process.env.RESEND_API_KEY); // Use a secure token
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
     const { to } = await req.json();
 
     await resend.emails.send({
-      from: "hello@emails.teevong.com", // ✅ Your custom verified domain
+      from: "Queue email from Teevong.com", // ✅ Your custom verified domain
       to,
       subject: "🧪 Test Email from Resend via emails.teevong.com",
-      html: `<p>Queue testing 1 minute</p>`,
+      react: TestEmailTemplate(),
     });
 
     return NextResponse.json({ success: true });
