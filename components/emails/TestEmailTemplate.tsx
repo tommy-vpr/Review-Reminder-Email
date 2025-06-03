@@ -14,17 +14,17 @@ export default function TestEmailTemplate() {
       <Head />
       <Body style={main}>
         <Container style={container}>
-          <Text style={logo}>twitch</Text>
+          <Text style={logo}>TEEVONG</Text>
 
           <Text style={paragraph}>
-            You updated the password for your Twitch account on Jun 23, 2022,
+            You updated the password for your TEEVONG account on Jun 23, 2022,
             4:06:00 PM. If this was you, then no further action is required.
           </Text>
 
           <Text style={paragraph}>
             However, if you did <strong>NOT</strong> perform this password
             change, please{" "}
-            <Link href="https://www.twitch.tv/account/reset-password">
+            <Link href="https://www.TEEVONG.tv/account/reset-password">
               reset your account password
             </Link>{" "}
             immediately.
@@ -32,24 +32,24 @@ export default function TestEmailTemplate() {
 
           <Text style={paragraph}>
             Remember to use a password that is both strong and unique to your
-            Twitch account. To learn more about creating a strong password,{" "}
-            <Link href="https://help.twitch.tv">click here</Link>.
+            TEEVONG account. To learn more about creating a strong password,{" "}
+            <Link href="https://help.TEEVONG.tv">click here</Link>.
           </Text>
 
           <Text style={paragraph}>
             Still have questions? Please contact{" "}
-            <Link href="https://help.twitch.tv">Twitch Support</Link>.
+            <Link href="https://help.TEEVONG.tv">TEEVONG Support</Link>.
           </Text>
 
           <Text style={paragraph}>
             Thanks,
             <br />
-            Twitch Support Team
+            TEEVONG Support Team
           </Text>
 
           <Hr />
           <Text style={footer}>
-            © 2022 Twitch, All Rights Reserved
+            © 2022 TEEVONG, All Rights Reserved
             <br />
             350 Bush Street, 2nd Floor, San Francisco, CA, 94104 - USA
           </Text>
