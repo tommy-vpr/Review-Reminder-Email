@@ -6,6 +6,7 @@ import {
   Text,
   Link,
   Hr,
+  Img,
 } from "@react-email/components";
 
 export default function TestEmailTemplate() {
@@ -14,7 +15,12 @@ export default function TestEmailTemplate() {
       <Head />
       <Body style={main}>
         <Container style={container}>
-          <Text style={logo}>TEEVONG</Text>
+          <Img
+            src="https://www.teevong.com/images/Tee-logo.webp"
+            alt="Teevong Logo"
+            width="120"
+            style={logoImage}
+          />
 
           <Text style={paragraph}>
             You updated the password for your TEEVONG account on Jun 23, 2022,
@@ -24,7 +30,7 @@ export default function TestEmailTemplate() {
           <Text style={paragraph}>
             However, if you did <strong>NOT</strong> perform this password
             change, please{" "}
-            <Link href="https://www.TEEVONG.tv/account/reset-password">
+            <Link href="https://www.teevong.com/account/reset-password">
               reset your account password
             </Link>{" "}
             immediately.
@@ -33,12 +39,12 @@ export default function TestEmailTemplate() {
           <Text style={paragraph}>
             Remember to use a password that is both strong and unique to your
             TEEVONG account. To learn more about creating a strong password,{" "}
-            <Link href="https://help.TEEVONG.tv">click here</Link>.
+            <Link href="https://help.teevong.com">click here</Link>.
           </Text>
 
           <Text style={paragraph}>
             Still have questions? Please contact{" "}
-            <Link href="https://help.TEEVONG.tv">TEEVONG Support</Link>.
+            <Link href="https://help.teevong.com">TEEVONG Support</Link>.
           </Text>
 
           <Text style={paragraph}>
@@ -75,13 +81,9 @@ const container = {
   boxShadow: "0 0 6px rgba(0,0,0,0.05)",
 };
 
-const logo = {
-  fontSize: "24px",
-  fontWeight: "bold",
-  color: "#9146FF",
+const logoImage = {
   marginBottom: "20px",
-  textTransform: "uppercase",
-} as const;
+};
 
 const paragraph = {
   fontSize: "14px",
