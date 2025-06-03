@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     const { to } = await req.json();
 
     await resend.emails.send({
-      from: "Queue email from Teevong.com", // ✅ Your custom verified domain
+      from: "Teevong <noreply@emails.teevong.com>", // ✅ Your custom verified domain
       to,
       subject: "🧪 Test Email from Resend via emails.teevong.com",
       react: TestEmailTemplate(),
