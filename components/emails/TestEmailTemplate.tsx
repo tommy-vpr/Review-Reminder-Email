@@ -16,7 +16,7 @@ export default function TestEmailTemplate() {
       <Body style={main}>
         <Container style={container}>
           <Img
-            src="https://www.teevong.com/images/Tee-logo.webp"
+            src="https://www.teevong.com/images/Tee-logo.png"
             alt="Teevong Logo"
             width="120"
             style={logoImage}
