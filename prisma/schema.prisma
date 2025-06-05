@@ -18,12 +18,13 @@ model Order {
 }
 
 model LineItem {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  title      String
-  quantity   Int
-  productId  String?
-  variantId  String?
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  quantity      Int
+  productId     String?
+  variantId     String?
   productHandle String?
-  orderId    String   @db.ObjectId
-  order      Order    @relation("OrderLineItems", fields: [orderId], references: [id])
+  image         String? // ✅ Add this line
+  orderId       String   @db.ObjectId
+  order         Order    @relation("OrderLineItems", fields: [orderId], references: [id])
 }

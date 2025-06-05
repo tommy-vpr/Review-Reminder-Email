@@ -9,6 +9,27 @@ const SHOPIFY_SECRET = process.env.SHOPIFY_WEBHOOOK_SECRET!;
 const ALLOWED_ORIGIN =
   process.env.ALLOWED_ORIGIN || "tv-testing-tutorial.myshopify.com";
 
+// Add this helper to get product by ID
+async function getProductFromShopify(productId: string) {
+  const res = await fetch(
+    `https://${process.env.SHOPIFY_DOMAIN}/admin/api/2024-10/products/${productId}.json`,
+    {
+      headers: {
+        "X-Shopify-Access-Token": process.env.SHOPIFY_ADMIN_API_KEY!,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!res.ok) {
+    console.warn(`❌ Failed to fetch product ${productId}`);
+    return null;
+  }
+
+  const data = await res.json();
+  return data.product;
+}
+
 function getCorsHeaders(origin: string) {
   return {
     "Access-Control-Allow-Origin": origin,
@@ -57,20 +78,35 @@ export async function POST(req: Request) {
     const email = order.email;
     const customerId = order.customer?.id?.toString() || null;
 
+    const lineItemsData = await Promise.all(
+      order.line_items.map(async (item: any) => {
+        let productImage = null;
+        let productHandle = null;
+
+        if (item.product_id) {
+          const product = await getProductFromShopify(item.product_id);
+          productImage = product?.image?.src || null;
+          productHandle = product?.handle || null;
+        }
+
+        return {
+          title: item.title,
+          productId: item.product_id?.toString() || null,
+          variantId: item.variant_id?.toString() || null,
+          productHandle,
+          image: productImage,
+          quantity: item.quantity || 1,
+        };
+      })
+    );
+
     const savedOrder = await prisma.order.create({
       data: {
         shopifyOrderId: orderId, // ✅ Fix here
         email,
         customerId,
         lineItems: {
-          create: order.line_items.map((item: any) => ({
-            title: item.title,
-            productId: item.product_id?.toString() || null,
-            variantId: item.variant_id?.toString() || null,
-            productHandle:
-              item.title?.toLowerCase().replace(/\s+/g, "-") || null,
-            quantity: item.quantity || 1,
-          })),
+          create: lineItemsData,
         },
       },
     });
