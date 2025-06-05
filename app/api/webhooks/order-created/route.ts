@@ -15,7 +15,7 @@ async function getProductFromShopify(productId: string) {
     `https://${process.env.SHOPIFY_DOMAIN}/admin/api/2024-10/products/${productId}.json`,
     {
       headers: {
-        "X-Shopify-Access-Token": process.env.SHOPIFY_ADMIN_API_KEY!,
+        "X-Shopify-Access-Token": process.env.SHOPIFY_ACCESS_TOKEN!,
         "Content-Type": "application/json",
       },
     }
