@@ -67,7 +67,8 @@ export async function POST(req: Request) {
             title: item.title,
             productId: item.product_id?.toString() || null,
             variantId: item.variant_id?.toString() || null,
-            productHandle: null, // ✅ assuming your schema uses this
+            productHandle:
+              item.title?.toLowerCase().replace(/\s+/g, "-") || null,
             quantity: item.quantity || 1,
           })),
         },

@@ -40,7 +40,17 @@ export async function POST(req: Request) {
         <p>Thanks for your recent order! We'd love to hear your feedback.</p>
         <p>Click below to review your products:</p>
         <ul>
-          - List of products -
+          ${order.lineItems
+            .filter((item) => item.productHandle)
+            .map(
+              (item) => `
+            <li>
+              <a href="https://tv-testing-tutorial.myshopify.com/products/${item.productHandle}" target="_blank">
+                ${item.title}
+              </a>
+            </li>`
+            )
+            .join("")}
         </ul>
         <p>As a thank you, you’ll receive 20% off your next purchase!</p>
       `,
