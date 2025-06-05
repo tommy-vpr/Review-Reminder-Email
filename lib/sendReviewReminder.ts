@@ -1,6 +1,7 @@
 export async function enqueueReviewReminder(orderId: string) {
   await fetch(
-    "https://qstash.upstash.io/v1/publish/https://www.teevong.com/api/queue/send-review-email",
+    "https://qstash.upstash.io/v2/publish/https://www.teevong.com/api/queue/send-review-email",
+    // "https://qstash.upstash.io/v2/publish/https://www.teevong.com/api/test-email",
     {
       method: "POST",
       headers: {
