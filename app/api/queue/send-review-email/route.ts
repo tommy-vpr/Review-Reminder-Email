@@ -30,16 +30,9 @@ export async function POST(req: Request) {
       );
     }
 
-    // Construct product links
-    const productLinks: string[] = (order.lineItems as LineItem[]).map(
-      (item: LineItem) => {
-        return `https://cultivated-reviews.vercel.app/product/${item.productHandle}`;
-      }
-    );
-
     // Send email via Resend
     await resend.emails.send({
-      from: "Cultivated Reviews <reviews@yourdomain.com>",
+      from: "Teevong <noreply@emails.teevong.com>",
       to: order.email,
       subject: "How was your order? Leave us a review!",
       html: `
@@ -47,9 +40,7 @@ export async function POST(req: Request) {
         <p>Thanks for your recent order! We'd love to hear your feedback.</p>
         <p>Click below to review your products:</p>
         <ul>
-          ${productLinks
-            .map((link: string) => `<li><a href="${link}">${link}</a></li>`)
-            .join("")}
+          - List of products -
         </ul>
         <p>As a thank you, you’ll receive 20% off your next purchase!</p>
       `,
