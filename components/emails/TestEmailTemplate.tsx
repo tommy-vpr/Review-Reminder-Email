@@ -37,7 +37,7 @@ export default function TestEmailTemplate() {
           </Text>
 
           <Text style={paragraph}>
-            Remember to use a password that is both strong and unique to your
+            Remember! to use a password that is both strong and unique to your
             TEEVONG account. To learn more about creating a strong password,{" "}
             <Link href="https://help.teevong.com">click here</Link>.
           </Text>
