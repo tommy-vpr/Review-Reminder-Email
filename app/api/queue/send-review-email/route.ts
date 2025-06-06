@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { Resend } from "resend";
+import ReviewReminderEamil from "@/components/emails/ReviewReminderEmail";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -35,27 +36,14 @@ export async function POST(req: Request) {
       from: "Teevong <noreply@emails.teevong.com>",
       to: order.email,
       subject: "How was your order? Leave us a review!",
-      html: `
-        <p>Hey ${order.customerName || "there"},</p>
-        <p>Thanks for your recent order! We'd love to hear your feedback.</p>
-        <p>Click below to review your products:</p>
-        <ul>
-  ${order.lineItems
-    .filter((item) => item.productHandle)
-    .map(
-      (item) => `
-    <li style="margin-bottom: 12px;">
-      <a href="https://www.teevong.com/products/${item.productHandle}" target="_blank" style="display: flex; align-items: center; text-decoration: none;">
-        <img src="${item.image}" alt="${item.title}" width="60" height="60" style="border-radius: 6px; margin-right: 12px;" />
-        <span>${item.title}</span>
-      </a>
-    </li>`
-    )
-    .join("")}
-</ul>
-
-        <p>As a thank you, you’ll receive 20% off your next purchase!</p>
-      `,
+      react: ReviewReminderEamil({
+        customerName: order.customerName || "there",
+        lineItems: order.lineItems.map((item) => ({
+          title: item.title,
+          productHandle: item.productHandle || "",
+          image: item.image || "",
+        })),
+      }),
     });
 
     return NextResponse.json({ success: true });
