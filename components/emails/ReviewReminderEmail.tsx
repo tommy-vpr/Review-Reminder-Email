@@ -59,7 +59,6 @@ export default function ReviewReminderEamil({
                     "https://tv-testing-tutorial.myshopify.com/images/placeholder.png"
                   }
                   alt={item.title}
-                  width="100"
                   height="100"
                   style={productImage}
                 />
@@ -122,7 +121,8 @@ const productLink = {
 };
 
 const productImage = {
-  borderRadius: "6px",
+  height: "100px",
+  width: "auto" as const,
 };
 
 const productTitle = {
