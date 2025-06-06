@@ -33,7 +33,7 @@ export default function ReviewReminderEamil({
           <Img
             src="https://www.teevong.com/images/Tee-logo.png"
             alt="Teevong Logo"
-            width="120"
+            width="80"
             style={logoImage}
           />
 
@@ -49,14 +49,14 @@ export default function ReviewReminderEamil({
             {lineItems.map((item, index) => (
               <Link
                 key={index}
-                href={`https://www.teevong.com/products/${item.productHandle}`}
+                href={`https://tv-testing-tutorial.myshopify.com/products/${item.productHandle}`}
                 target="_blank"
                 style={productLink}
               >
                 <Img
                   src={
                     item.image ||
-                    "https://www.teevong.com/images/placeholder.png"
+                    "https://tv-testing-tutorial.myshopify.com/images/placeholder.png"
                   }
                   alt={item.title}
                   width="60"
@@ -114,15 +114,15 @@ const paragraph = {
 
 const productLink = {
   display: "flex",
+  flexDirection: "column" as const, // ✅ make children stack vertically
   alignItems: "center",
-  gap: "12px",
+  gap: "8px",
   textDecoration: "none",
-  marginBottom: "12px",
+  marginBottom: "16px",
 };
 
 const productImage = {
   borderRadius: "6px",
-  border: "1px solid #ccc",
 };
 
 const productTitle = {
