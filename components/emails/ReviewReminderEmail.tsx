@@ -45,25 +45,26 @@ export default function ReviewReminderEamil({
             Please take a moment to review the products you purchased:
           </Text>
 
-          <Section>
+          <Section style={productGrid}>
             {lineItems.map((item, index) => (
-              <Link
-                key={index}
-                href={`https://tv-testing-tutorial.myshopify.com/products/${item.productHandle}`}
-                target="_blank"
-                style={productLink}
-              >
-                <Img
-                  src={
-                    item.image ||
-                    "https://tv-testing-tutorial.myshopify.com/images/placeholder.png"
-                  }
-                  alt={item.title}
-                  height="100"
-                  style={productImage}
-                />
-                <Text style={productTitle}>{item.title}</Text>
-              </Link>
+              <div key={index} style={productGridItem}>
+                <Link
+                  href={`https://tv-testing-tutorial.myshopify.com/products/${item.productHandle}`}
+                  target="_blank"
+                  style={productLink}
+                >
+                  <Img
+                    src={
+                      item.image ||
+                      "https://tv-testing-tutorial.myshopify.com/images/placeholder.png"
+                    }
+                    alt={item.title}
+                    height="100"
+                    style={productImage}
+                  />
+                  <Text style={productTitle}>{item.title}</Text>
+                </Link>
+              </div>
             ))}
           </Section>
 
@@ -109,6 +110,22 @@ const paragraph = {
   color: "#333333",
   lineHeight: "1.5",
   marginBottom: "16px",
+};
+
+const productGrid = {
+  display: "flex",
+  flexWrap: "wrap" as const,
+  justifyContent: "space-between",
+  gap: "16px",
+};
+
+const productGridItem = {
+  width: "calc(50% - 8px)",
+  boxSizing: "border-box" as const,
+  display: "flex",
+  flexDirection: "column" as const,
+  alignItems: "center",
+  textAlign: "center" as const,
 };
 
 const productLink = {
