@@ -59,8 +59,8 @@ export default function ReviewReminderEamil({
                     "https://tv-testing-tutorial.myshopify.com/images/placeholder.png"
                   }
                   alt={item.title}
-                  width="60"
-                  height="60"
+                  width="100"
+                  height="100"
                   style={productImage}
                 />
                 <Text style={productTitle}>{item.title}</Text>
