@@ -5,7 +5,7 @@ import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { enqueueReviewReminder } from "@/lib/sendReviewReminder";
 
-const SHOPIFY_SECRET = process.env.SHOPIFY_WEBHOOOK_SECRET!;
+const SHOPIFY_WEBHOOOK_SECRET = process.env.SHOPIFY_WEBHOOOK_SECRET!;
 const ALLOWED_ORIGIN =
   process.env.ALLOWED_ORIGIN || "tv-testing-tutorial.myshopify.com";
 
@@ -42,7 +42,7 @@ function getCorsHeaders(origin: string) {
 function isValidShopifyWebhook(req: Request, rawBody: string): boolean {
   const hmac = req.headers.get("x-shopify-hmac-sha256") || "";
   const digest = crypto
-    .createHmac("sha256", SHOPIFY_SECRET)
+    .createHmac("sha256", SHOPIFY_WEBHOOOK_SECRET)
     .update(rawBody, "utf8")
     .digest("base64");
 
