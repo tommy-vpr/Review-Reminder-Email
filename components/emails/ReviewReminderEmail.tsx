@@ -1,13 +1,16 @@
 import {
-  Html,
-  Head,
   Body,
   Container,
-  Text,
-  Link,
-  Hr,
+  Column,
+  Head,
+  Html,
   Img,
+  Link,
+  Preview,
+  Row,
   Section,
+  Text,
+  Hr,
 } from "@react-email/components";
 
 type LineItem = {
@@ -45,27 +48,49 @@ export default function ReviewReminderEamil({
             Please take a moment to review the products you purchased:
           </Text>
 
-          <Section style={productGrid}>
-            {lineItems.map((item, index) => (
-              <div key={index} style={productGridItem}>
-                <Link
-                  href={`https://tv-testing-tutorial.myshopify.com/products/${item.productHandle}`}
-                  target="_blank"
-                  style={productLink}
-                >
-                  <Img
-                    src={
-                      item.image ||
-                      "https://tv-testing-tutorial.myshopify.com/images/placeholder.png"
-                    }
-                    alt={item.title}
-                    height="100"
-                    style={productImage}
-                  />
-                  <Text style={productTitle}>{item.title}</Text>
-                </Link>
-              </div>
-            ))}
+          <Section>
+            {lineItems
+              .reduce((rows, item, index) => {
+                if (index % 2 === 0) rows.push([]);
+                rows[rows.length - 1].push(item);
+                return rows;
+              }, [] as LineItem[][])
+              .map((row, rowIndex) => (
+                <Row key={rowIndex} style={{ marginBottom: "20px" }}>
+                  {row.map((item, colIndex) => (
+                    <Column
+                      key={colIndex}
+                      style={{
+                        width: "50%",
+                        textAlign: "center",
+                        padding: "10px",
+                      }}
+                    >
+                      <Link
+                        href={`https://tv-testing-tutorial.myshopify.com/products/${item.productHandle}`}
+                        style={{ display: "block", textAlign: "center" }}
+                      >
+                        <Img
+                          src={
+                            item.image ||
+                            "https://tv-testing-tutorial.myshopify.com/images/placeholder.png"
+                          }
+                          alt={item.title}
+                          width={140}
+                          style={productImage}
+                        />
+                      </Link>
+                      <Text style={productTitle}>{item.title}</Text>
+                      <Link
+                        href={`https://tv-testing-tutorial.myshopify.com/products/${item.productHandle}`}
+                        style={productLinkStyle}
+                      >
+                        View Product
+                      </Link>
+                    </Column>
+                  ))}
+                </Row>
+              ))}
           </Section>
 
           <Text style={paragraph}>
@@ -112,39 +137,23 @@ const paragraph = {
   marginBottom: "16px",
 };
 
-const productGrid = {
-  display: "flex",
-  flexWrap: "wrap" as const,
-  justifyContent: "space-between",
-  gap: "16px",
-};
-
-const productGridItem = {
-  width: "calc(50% - 8px)",
-  boxSizing: "border-box" as const,
-  display: "flex",
-  flexDirection: "column" as const,
-  alignItems: "center",
-  textAlign: "center" as const,
-};
-
-const productLink = {
-  display: "flex",
-  flexDirection: "column" as const, // ✅ make children stack vertically
-  alignItems: "center",
-  gap: "8px",
-  textDecoration: "none",
-  marginBottom: "16px",
-};
-
 const productImage = {
-  height: "100px",
-  width: "auto" as const,
+  display: "inline-block",
+  margin: "0 auto",
 };
 
 const productTitle = {
+  fontSize: "16px",
+  fontWeight: "bold",
+  textTransform: "uppercase" as const,
+  marginBottom: "5px",
+  color: "#333",
+};
+
+const productLinkStyle = {
   fontSize: "14px",
-  color: "#000",
+  color: "#009444",
+  textDecoration: "none",
 };
 
 const footer = {
