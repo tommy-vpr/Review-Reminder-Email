@@ -152,7 +152,7 @@ const productTitle = {
 
 const productLinkStyle = {
   fontSize: "14px",
-  color: "#009444",
+  color: "cornflowerblue",
   textDecoration: "none",
 };
 
